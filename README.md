@@ -74,6 +74,9 @@ make fabric-down
 Record the exact host, OS, Docker, Fabric, and Node versions in your artifact
 appendix so reviewers can interpret the latency numbers.
 
+Run `make env` (wraps `scripts/collect_env.sh`) on the testbed to capture all of
+those automatically as a paste-ready block.
+
 ## Layout
 
 ```

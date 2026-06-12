@@ -5,8 +5,8 @@
 PY ?= python3
 NODE ?= node
 
-.PHONY: all security conformance test vectors storage local-bench tables \
-        fabric-up fabric-deploy fabric-bench fabric-down clean help
+.PHONY: all security conformance test vectors storage local-bench tables env \
+        fabric-up fabric-deploy fabric-bench fabric-bench-cli fabric-down clean help
 
 help:
 	@echo "Targets:"
@@ -16,10 +16,12 @@ help:
 	@echo "  make vectors       - regenerate cross-language conformance vectors"
 	@echo "  make storage       - compute exact per-anchor world-state size (REAL)"
 	@echo "  make local-bench   - local crypto complexity-trend bench (NOT Fabric)"
+	@echo "  make env           - capture host/OS/Docker/Fabric/Node versions for the appendix"
 	@echo "  make tables        - regenerate paper/tab_security.tex + tab_cost.tex"
 	@echo "  make all           - vectors + test + conformance + security + storage + tables"
 	@echo "  --- Fabric testbed (requires FABRIC_SAMPLES; see network/README.md) ---"
-	@echo "  make fabric-up / fabric-deploy / fabric-bench / fabric-down"
+	@echo "  make fabric-up / fabric-deploy / fabric-bench-cli / fabric-down"
+	@echo "  make fabric-bench-cli - REAL latency via peer CLI on the running network"
 	@echo "  make clean         - remove generated artifacts and caches"
 
 all: vectors test conformance security storage tables
@@ -43,6 +45,9 @@ storage:
 local-bench:
 	$(NODE) bench/local_crypto_bench.js
 
+env:
+	bash scripts/collect_env.sh
+
 tables: security storage
 	$(PY) experiments/gen_tables.py
 
@@ -57,6 +62,10 @@ fabric-deploy:
 
 fabric-bench:
 	$(NODE) bench/bench_fabric.js --iterations 100 --warmup 10
+	$(PY) experiments/gen_tables.py
+
+fabric-bench-cli:
+	bash bench/bench_fabric_cli.sh
 	$(PY) experiments/gen_tables.py
 
 fabric-down:

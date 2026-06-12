@@ -8,8 +8,7 @@ cd "$FABRIC_SAMPLES/test-network"
 
 for ch in domain-a-channel domain-b-channel domain-c-channel; do
   ./network.sh deployCC -c "$ch" -ccn commitWindow \
-    -ccp "$REPO/chaincode" -ccl javascript \
-    -cci "org.hyperledger.fabric:GetMetadata"
+    -ccp "$REPO/chaincode" -ccl javascript
   echo "[deploy] commitWindow -> $ch"
 done
 
