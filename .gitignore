@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
+# Fabric latency results are environment-specific; keep the placeholder template
+# but ignore locally-produced gateway logs
+*.log

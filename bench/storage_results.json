@@ -1,0 +1,20 @@
+{
+  "note": "Deterministic serialized size of one persisted anchor record. Real, not Fabric-timing. Leaves are NOT stored (only the root), so size is O(1) per anchor, independent of events-per-window.",
+  "rows": [
+    {
+      "sourceChannel": "domain-a-channel",
+      "quorum": 1,
+      "bytesPerAnchor": 273
+    },
+    {
+      "sourceChannel": "domain-a-channel",
+      "quorum": 2,
+      "bytesPerAnchor": 348
+    },
+    {
+      "sourceChannel": "domain-a-channel",
+      "quorum": 3,
+      "bytesPerAnchor": 423
+    }
+  ]
+}

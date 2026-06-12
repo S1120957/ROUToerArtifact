@@ -1,0 +1,53 @@
+{
+  "salt_key_utf8": "per-channel-salt-key-known-to-source-members-only",
+  "empty_root_hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "events": [
+    {
+      "eid": "tx-0-0",
+      "height": 0,
+      "tx_index": 0,
+      "source_domain": "domain-a-channel",
+      "payload_utf8": "payload-0-0",
+      "relevant": true,
+      "leaf_hex": "3e6de70d76291833fd15106e7d7e578988540605cc21654651c95ebe1e179122"
+    },
+    {
+      "eid": "tx-1-0",
+      "height": 1,
+      "tx_index": 0,
+      "source_domain": "domain-a-channel",
+      "payload_utf8": "payload-1-0",
+      "relevant": true,
+      "leaf_hex": "8a5eef60a358e529fd3ce1f1c6d1b7d4e49e4c75ee96e3b67e0ad72a986c0b7d"
+    },
+    {
+      "eid": "tx-1-1",
+      "height": 1,
+      "tx_index": 1,
+      "source_domain": "domain-a-channel",
+      "payload_utf8": "ignore-me",
+      "relevant": false,
+      "leaf_hex": "0fb1026c2fb1cd52aeb3647e4d85abb4290245a465fcf7269ce8d261302d44eb"
+    },
+    {
+      "eid": "tx-2-0",
+      "height": 2,
+      "tx_index": 0,
+      "source_domain": "domain-a-channel",
+      "payload_utf8": "payload-2-0",
+      "relevant": true,
+      "leaf_hex": "7c009f99f9b7872f428fd31a3bd6077a48c553881bc50e3e662d1c01cba25388"
+    }
+  ],
+  "window_root_hex": "ee99f9b9a6a0f7d3f071246676a4dd56ba17358572fd637aacec1be94348d076",
+  "window_count": 3,
+  "commitment": {
+    "source_channel": "domain-a-channel",
+    "w": 1,
+    "a": 0,
+    "b": 2,
+    "root_hex": "ee99f9b9a6a0f7d3f071246676a4dd56ba17358572fd637aacec1be94348d076",
+    "count": 3,
+    "commitment_bytes_hex": "0000000000000010646f6d61696e2d612d6368616e6e656c0000000000000001000000000000000000000000000000020000000000000020ee99f9b9a6a0f7d3f071246676a4dd56ba17358572fd637aacec1be94348d0760000000000000003"
+  }
+}

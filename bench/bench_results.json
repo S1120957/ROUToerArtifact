@@ -1,0 +1,27 @@
+{
+  "environment": "TO_BE_MEASURED (record CPU, RAM, OS, Fabric version, Node version)",
+  "iterations": "TO_BE_MEASURED",
+  "warmup": "TO_BE_MEASURED",
+  "operations": {
+    "CommitWindow N=10": {
+      "median_ms": "TO_BE_MEASURED",
+      "p95_ms": "TO_BE_MEASURED"
+    },
+    "CommitWindow N=100": {
+      "median_ms": "TO_BE_MEASURED",
+      "p95_ms": "TO_BE_MEASURED"
+    },
+    "CommitWindow N=1000": {
+      "median_ms": "TO_BE_MEASURED",
+      "p95_ms": "TO_BE_MEASURED"
+    },
+    "Anchor validate": {
+      "median_ms": "TO_BE_MEASURED",
+      "p95_ms": "TO_BE_MEASURED"
+    },
+    "GetAnchors + verify": {
+      "median_ms": "TO_BE_MEASURED",
+      "p95_ms": "TO_BE_MEASURED"
+    }
+  }
+}

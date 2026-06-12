@@ -1,0 +1,66 @@
+{
+  "scenario": {
+    "policy": "2-of-3",
+    "windows": 8,
+    "delta": 3
+  },
+  "cases": [
+    {
+      "behaviour": "honest baseline",
+      "expect_detected": false,
+      "detected": false,
+      "caught_by": "none",
+      "reason": "accepted",
+      "maps_to": "completeness (Def. 3)"
+    },
+    {
+      "behaviour": "drop event within a window",
+      "expect_detected": true,
+      "detected": true,
+      "caught_by": "anchor",
+      "reason": "bad-endorsement",
+      "maps_to": "Thm. 1 (root mismatch)"
+    },
+    {
+      "behaviour": "drop an interior window",
+      "expect_detected": true,
+      "detected": true,
+      "caught_by": "anchor",
+      "reason": "non-monotonic-window",
+      "maps_to": "Thm. 2 (commit-time reject)"
+    },
+    {
+      "behaviour": "drop the tail (truncation)",
+      "expect_detected": true,
+      "detected": true,
+      "caught_by": "verify",
+      "reason": "stale-frontier",
+      "maps_to": "freshness deadline (stall)"
+    },
+    {
+      "behaviour": "reorder within a window",
+      "expect_detected": true,
+      "detected": true,
+      "caught_by": "anchor",
+      "reason": "bad-endorsement",
+      "maps_to": "Thm. 3"
+    },
+    {
+      "behaviour": "insert a fabricated event",
+      "expect_detected": true,
+      "detected": true,
+      "caught_by": "anchor",
+      "reason": "bad-endorsement",
+      "maps_to": "Thm. 3"
+    },
+    {
+      "behaviour": "replay an old window",
+      "expect_detected": true,
+      "detected": true,
+      "caught_by": "anchor",
+      "reason": "non-monotonic-window",
+      "maps_to": "Thm. 4"
+    }
+  ],
+  "all_ok": true
+}

@@ -1,0 +1,21 @@
+{
+  "host_note": "LOCAL reference host -- NOT the Fabric testbed. Complexity-trend only.",
+  "node_version": "v22.22.2",
+  "windowRoot_build": [
+    {
+      "N": 10,
+      "median_ms": 0.16664099999999848,
+      "p95_ms": 1.9185609999999969
+    },
+    {
+      "N": 100,
+      "median_ms": 1.102801999999997,
+      "p95_ms": 1.8859229999999911
+    },
+    {
+      "N": 1000,
+      "median_ms": 12.558822000000077,
+      "p95_ms": 16.572321999999986
+    }
+  ]
+}

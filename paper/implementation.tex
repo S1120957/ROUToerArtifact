@@ -1,0 +1,57 @@
+% =====================================================================
+%  Implementation section -- replaces the \todonote Implementation block.
+%  All claims here are backed by the artifact (see README.md). No invented
+%  numbers appear in this section.
+% =====================================================================
+\section{Implementation}
+\label{sec:impl}
+
+The artifact has two layers, separated so that the security claims do not depend
+on any timing or hardware. (i)~A stdlib-only Python \emph{reference simulator}
+implements the protocol logic---salted leaves, Merkle commitment, simulated
+source endorsement, the on-chain anchor predicate, and the off-chain
+verifier---and the adversarial coordinator. (ii)~A Hyperledger Fabric~2.5
+\emph{deployment} implements the same protocol as Node chaincode:
+\texttt{CommitWindow} on each source channel and \texttt{Anchor}\,/\,%
+\texttt{GetAnchors} on the coordination channel.
+
+\paragraph{Canonical encoding and determinism.}
+Everything that is hashed uses an explicit, length-prefixed byte encoding rather
+than JSON, because JSON number, whitespace, and key-order handling differs
+across languages. A leaf is
+$\leaff(e)=\Hh(\prf_{k_s}(\mathsf{eid}(e))\,\|\,\sigma(e))$ with
+$\Hh=\text{SHA-256}$, $\prf=\text{HMAC-SHA256}$, and $\sigma$ a length-prefixed
+concatenation of $(\mathsf{eid},\text{height},\text{txIndex},\text{domain},
+\Hh(\text{payload}))$; the raw payload enters only via its hash, preserving
+content confidentiality. The Python reference and the Node chaincode share this
+encoding, and a cross-language conformance test verifies that the Node library
+reproduces Python-generated vectors byte-for-byte (identical Merkle roots,
+leaves, and commitment pre-images); it runs with \texttt{make conformance}.
+
+\paragraph{Source channel: \texttt{CommitWindow}.}
+Cross-domain-relevant events are recorded into an on-channel index; for window
+$w$ over height range $[a,b]$, \texttt{CommitWindow} range-scans the index,
+canonically orders the events by $(\text{height},\text{txIndex})$, computes
+$\mroot^w_s$ and the count, and writes the commitment
+$(s,w,[a,b],\mroot^w_s,\text{count})$. The transaction is endorsed under the
+source channel's policy $P_s$, so the committed root is attested by an honest
+quorum, not by the coordinator. The per-channel salt key $k_s$ is supplied via
+Fabric transient data and is never written to the ledger.
+
+\paragraph{Coordination channel: \texttt{Anchor}.}
+\texttt{Anchor} verifies the source endorsement against a registered policy,
+then enforces strict window monotonicity ($w=w^-{+}1$) and height contiguity
+($a=b^-{+}1$) per source channel, rejecting at commit time otherwise.
+\texttt{GetAnchors} is the verifier's read path. The endorsement check uses the
+same keyed construction as the reference simulator for reproducibility; wiring
+it to source-MSP ECDSA certificates (distributed via the on-chain registry) is
+the single change required for a multi-MSP deployment and does not affect the
+monotonicity/contiguity logic.
+
+\paragraph{Reproducibility.}
+Every experiment runs from a clean checkout. \texttt{make security} runs the
+deterministic omission-detection battery; \texttt{make conformance} runs the
+cross-language vector check; \texttt{make test} runs the unit tests;
+\texttt{make tables} regenerates the LaTeX tables in this paper from the result
+JSON. The Fabric latency measurements require the single-host network in
+\texttt{network/README.md} and are produced by \texttt{bench/bench\_fabric.js}.
