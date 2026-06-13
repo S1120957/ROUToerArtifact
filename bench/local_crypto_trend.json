@@ -1,21 +1,21 @@
 {
   "host_note": "LOCAL reference host -- NOT the Fabric testbed. Complexity-trend only.",
-  "node_version": "v22.22.2",
+  "node_version": "v20.20.2",
   "windowRoot_build": [
     {
       "N": 10,
-      "median_ms": 0.16664099999999848,
-      "p95_ms": 1.9185609999999969
+      "median_ms": 0.09956900000000246,
+      "p95_ms": 0.8852410000000006
     },
     {
       "N": 100,
-      "median_ms": 1.102801999999997,
-      "p95_ms": 1.8859229999999911
+      "median_ms": 0.7813390000000027,
+      "p95_ms": 2.201667000000043
     },
     {
       "N": 1000,
-      "median_ms": 12.558822000000077,
-      "p95_ms": 16.572321999999986
+      "median_ms": 11.710788000000093,
+      "p95_ms": 15.221987999999783
     }
   ]
 }
