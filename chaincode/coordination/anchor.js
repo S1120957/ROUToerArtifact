@@ -102,7 +102,12 @@ class Anchor extends Contract {
     const end = `${ANC_PREFIX}${sourceChannel}:~`;
     const iter = await ctx.stub.getStateByRange(start, end);
     const out = [];
-    for await (const kv of iter) out.push(JSON.parse(kv.value.toString()));
+    let res = await iter.next();
+    while (!res.done) {
+      out.push(JSON.parse(res.value.value.toString()));
+      res = await iter.next();
+    }
+    await iter.close();
     return JSON.stringify(out);
   }
 }

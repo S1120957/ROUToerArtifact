@@ -8,9 +8,9 @@
 \toprule
 Quantity & Complexity & Measured \\
 \midrule
-$\mathsf{CommitWindow}$ (build root, $N{=}100$) & $O(N)$ & \texttt{TO\_BE\_MEASURED} \\
-$\mathsf{Anchor}$ validation & $O(1)$ & \texttt{TO\_BE\_MEASURED} \\
-$\mathsf{Verify}$ per channel & $O(W_s)$ & \texttt{TO\_BE\_MEASURED} \\
+$\mathsf{CommitWindow}$ (build root, $N{=}100$) & $O(N)$ & median 2235.5 ms / p95 2314.0 ms \\
+$\mathsf{Anchor}$ validation & $O(1)$ & median 2149.0 ms / p95 2251.0 ms \\
+$\mathsf{Verify}$ per channel & $O(W_s)$ & median 72.0 ms / p95 118.0 ms \\
 Anchor world-state size (2-of-3) & $O(1)$/window & 348 bytes (real) \\
 \bottomrule
 \end{tabular}
